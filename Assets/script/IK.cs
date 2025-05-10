@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
-using System.Collections;  // اضافه کردن فضای نام برای IEnumerator
+using System.Collections;  
 
 public class IK : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class IK : MonoBehaviour
     public Transform handBone;
     public Animator animator;
 
-    public string reachTriggerName = "ReachingOut"; // باید تو Animator یه trigger همین اسم داشته باشی
+    public string reachTriggerName = "ReachingOut"; 
 
     private bool hasActivated = false;
 
@@ -29,13 +29,12 @@ public class IK : MonoBehaviour
 
     IEnumerator PlayReachAnimationAndActivateIK()
     {
-        animator.ResetTrigger(reachTriggerName); // اگه تریگر قبلاً زده شده بود، ریستش کن
-        animator.SetTrigger(reachTriggerName);   // فقط همین انیمیشن اجرا میشه
+        animator.ResetTrigger(reachTriggerName); 
+        animator.SetTrigger(reachTriggerName);  
 
-        // صبر کن تا انیمیشن به پایان برسد
+  
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
 
-        // حالا که انیمیشن تمام شد، IK فعال می‌شود
         rig.weight = 1f;
     }
 }
